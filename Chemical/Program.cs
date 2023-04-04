@@ -81,8 +81,8 @@ namespace Chemical
                 flagmain = Console.ReadLine();
             }
             //display the Most and Least efficiency chemicals
-            Console.WriteLine($"The Most Efficiency Chemicals is call {MostChemical} the Efficiency of the chemical was {MostEfficiency}\n" +
-                $"The least Efficiency Chemicals is call {LeastChemical} the Efficiency of the chemical was {LeastEfficiency}");
+            Console.WriteLine($"The Most Efficient Chemicals is call {MostChemical} the Efficient of the chemical was {MostEfficiency}\n" +
+                $"The least Efficient Chemicals is call {LeastChemical} the Efficient of the chemical was {LeastEfficiency}");
         }
     }
 }
