@@ -1,7 +1,7 @@
 ﻿//imports
 using System;
 using System.Threading;
-namespace Chemical
+namespace ChemicalApp
 {
     class Program
     {
@@ -12,28 +12,62 @@ namespace Chemical
         static float LeastEfficiency = 5001;
         // methods
 
+
+
+
+        static string CheckName()
+           
+        {
+            while (true)
+            {
+                //get name
+
+                Console.WriteLine("Enter the name of the chemical your are going to test:\n");
+                string chemicalName = Console.ReadLine();
+
+                // displaying the chemical the user put in
+                Console.WriteLine($"You have entered {chemicalName.ToUpper()} \n");
+                if (!chemicalName.Equals(""))
+                {
+                    //convert chemical name to capitalised name
+
+                    chemicalName = chemicalName[0].ToString().ToUpper() + chemicalName.Substring(1);
+                    return chemicalName;
+
+
+                }
+                else
+                {
+                    Console.WriteLine("Error: You must enter a name for the chemical name");
+                }
+            }
+
+        }
+
         static void OneChemical()
         {
-            //Enter and store chemicals that being test
-            Console.WriteLine("Enter the Chemical name:\n");
-            string chemicalName = Console.ReadLine();
+            
+            //get name
 
+            string chemicalName = CheckName();
             float sumEfficiency = 0;
 
             for (int i = 0; i < 5; i++)
             {
                 //generated a randomly number of initial live germs
+
                 Random rangerm = new Random();
                 int ranGermsNum = rangerm.Next(5000, 10000);
-                //inform in between the chemcial and measured the germs
-                Console.WriteLine("wait 2sec and then we will remeasured the germs\n");
 
-                Thread.Sleep(2000);
+                //inform in between the chemcial and measured the germs
+
 
                 //display the number of germs
+
                 Console.WriteLine($"The number of germs are {ranGermsNum}");
 
                 //After an amount of time. the number of live germs is again measured
+
                 Random rannum = new Random();
                 int ranGerms = rannum.Next(0, ranGermsNum);
 
@@ -41,7 +75,11 @@ namespace Chemical
 
                 float efficiency = (float)(ranGermsNum - ranGerms) / 2;
 
-                Console.WriteLine($"Number of germs left: {ranGerms}");
+                Console.WriteLine("wait 2 seconds and then we will remeasure the germs");
+
+                Thread.Sleep(2000);
+
+                Console.WriteLine($"Number of germs remaning: {ranGerms}\n");
 
                 sumEfficiency += efficiency;
 
@@ -70,19 +108,49 @@ namespace Chemical
         //main process
         static void Main(string[] args)
         {
+            //display the program Name
+            Console.WriteLine(
+            @"                                                                                     " + "\n" +
+            @"   ██████╗██╗  ██╗███████╗███╗   ███╗██╗ ██████╗ █████╗ ██╗      █████╗ ██████╗ ██████╗" + "\n" +
+            @"  ██╔════╝██║  ██║██╔════╝████╗ ████║██║██╔════╝██╔══██╗██║     ██╔══██╗██╔══██╗██╔══██╗" + "\n" +
+            @"  ██║     ███████║█████╗  ██╔████╔██║██║██║     ███████║██║     ███████║██████╔╝██████╔╝" + "\n" +
+            @"  ██║     ██╔══██║██╔══╝  ██║╚██╔╝██║██║██║     ██╔══██║██║     ██╔══██║██╔═══╝ ██╔═══╝ " + "\n" +
+            @"  ╚██████╗██║  ██║███████╗██║ ╚═╝ ██║██║╚██████╗██║  ██║███████╗██║  ██║██║     ██║     " + "\n" +
+            @"   ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝   " + "\n");
+
+            Console.WriteLine("Chemical app is here to help you test how efficent the selected chemical is against germs. \n");
+
             //loop until user types 'stop'
+
             string flagmain = "";
             while (!flagmain.Equals("XXX")) 
             {
                 //call OneChemicals()
+
                 OneChemical();
 
-                Console.WriteLine("Press < ENTER > to add another or type 'XXX' to quit\n");
-                flagmain = Console.ReadLine();
+
+                bool flagCheck = true;
+                while (flagCheck)
+                {
+                    Console.WriteLine("Press < ENTER > to test another chemical or type 'XXX or xxx' to quit\n");
+                    flagmain = Console.ReadLine().ToUpper();
+
+                    if (flagmain == "XXX" || flagmain == "")
+                    {
+                        flagCheck = false;
+                    }
+                    else 
+                    {
+                        Console.WriteLine("Error: Please enter a correct choice ");
+                    }
+
+                }
             }
             //display the Most and Least efficiency chemicals
-            Console.WriteLine($"The Most Efficient Chemicals is call {MostChemical} the Efficient of the chemical was {MostEfficiency}\n" +
-                $"The least Efficient Chemicals is call {LeastChemical} the Efficient of the chemical was {LeastEfficiency}");
+
+            Console.WriteLine($"The Most Efficient Chemical is {MostChemical} the Efficiency of the chemical was {MostEfficiency}\n" +
+                $"The least Efficient Chemical is {LeastChemical} the Efficiency of the chemical was {LeastEfficiency}");
         }
     }
 }
