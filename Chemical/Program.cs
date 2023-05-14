@@ -24,21 +24,29 @@ namespace ChemicalApp
 
                 Console.WriteLine("Enter the name of the chemical your are going to test:\n");
                 string chemicalName = Console.ReadLine();
+                
 
-                // displaying the chemical the user put in
-                Console.WriteLine($"You have entered {chemicalName.ToUpper()} \n");
+                
                 if (!chemicalName.Equals(""))
                 {
                     //convert chemical name to capitalised name
 
-                    chemicalName = chemicalName[0].ToString().ToUpper() + chemicalName.Substring(1);
+                    chemicalName = string.Concat(chemicalName[0].ToString().ToUpper(), chemicalName.Substring(1).ToLower());
+
+                    // displaying the chemical the user put in
+                    Console.WriteLine($"You have entered {chemicalName} \n");
+
                     return chemicalName;
 
 
                 }
                 else
                 {
-                    Console.WriteLine("Error: You must enter a name for the chemical name");
+                    Console.ForegroundColor = ConsoleColor.Red;
+
+                    Console.WriteLine("!!!!!!!!!!Error: You must enter a name for the chemical name!!!!!!!!!!");
+
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
@@ -51,6 +59,8 @@ namespace ChemicalApp
 
             string chemicalName = CheckName();
             float sumEfficiency = 0;
+
+            Console.WriteLine($"the {chemicalName} will be tested 5 times please wait for the {chemicalName} to be tested \n");
 
             for (int i = 0; i < 5; i++)
             {
@@ -142,7 +152,11 @@ namespace ChemicalApp
                     }
                     else 
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+
                         Console.WriteLine("Error: Please enter a correct choice ");
+
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
 
                 }
